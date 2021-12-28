@@ -5,5 +5,16 @@ title: About me
 
 ## 매일매일 열 걸음 성장하는 개발자 김동현입니다.
 
-한양대학교 정보시스템학과에 재학중인 프론트엔드 개발자 김동현입니다!
-안드로이드 앱 개발 및 임베디드 시스템에 관심이 있습니다.
+👋한양대학교 정보시스템학과에 재학중인 안드로이드 개발자 김동현입니다!<br>
+앱 개발 및 임베디드 시스템에 관심이 있습니다.
+
+## Skills
+
+<div style="display: flex;", class = "box">
+  <div style="width: 100, height: 20, color: red", class = "title">
+  </div>
+  <div style="width: 100, height: 20, color: yellow", class = "perc">
+  </div>
+</div>  
+
+
