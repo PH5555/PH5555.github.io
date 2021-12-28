@@ -10,16 +10,12 @@ title: About me
 
 ## Skills
 
-<div style="height: 20px; width: 200px, background-color:red">
-    flutter
-</div>
-
-<div style="display: flex;">
-  <div style="height: 20px; width: 200px; background-color:red;">
+<div style="display: flex; background-color:#eeeeed; width: 60%">
+  <div style="height: 40px; width: 20%px; background-color:#58bec6; color: white; text-align: center;">
     flutter
   </div>
-  <div style="height: 20px; width: 200px; background-color:green;">
-    30%
+  <div style="height: 40px; width: 20%px; background-color:#48a0a5;">
+   
   </div>
 </div>  
 
