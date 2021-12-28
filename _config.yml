@@ -15,11 +15,8 @@ author: Kim Donghyeon
 
 navbar-links:
   About Me: "aboutme"
-  Skill: "https://beautifuljekyll.com"
-  Resources:
-    - Beautiful Jekyll: "https://beautifuljekyll.com"
-    - Learn markdown: "https://www.markdowntutorial.com/"
-  Author's home: "https://deanattali.com"
+  Skills: "aboutme"
+  Projects: "aboutme"
 
 # --- Logo --- #
 
@@ -42,18 +39,18 @@ round-avatar: true
 social-network-links:
   email: "lmkn5342@gmail.com"
   rss: true  # remove this line if you don't want to show an RSS link at the bottom
-  facebook: deanattali
+#   facebook: deanattali
   github: daattali
-  twitter: daattali
-  patreon: DeanAttali
-  youtube: c/daattali
+#   twitter: daattali
+#   patreon: DeanAttali
+#   youtube: c/daattali
 #  medium: yourname
 #  reddit: yourname
 #  linkedin: daattali
 #  xing: yourname
 #  stackoverflow: "3943160/daattali"
 #  snapchat: deanat78
-#  instagram: deanat78
+ instagram: deanat78
 #  spotify: yourname
 #  telephone: +14159998888
 #  steam: deanat78
