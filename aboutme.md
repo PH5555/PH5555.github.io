@@ -10,11 +10,57 @@ title: About me
 
 ## Skills
 
+<div style="height: 35px"></div>
+
 <div style="display: flex; background-color:#eeeeed; width: 90%; position: relative">
   <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
-    flutter
+    C/C++
   </div>
-  <div style="height: 40px; width: 50%; background-color:#48a0a5;"></div>
-  <div style="position: absolute; right: 7;"> 40%</div>
-</div>  
+  <div style="height: 40px; width: 45%; background-color:#48a0a5;"></div>
+</div>
+
+<div style="height: 20px"></div>
+
+<div style="display: flex; background-color:#eeeeed; width: 90%; position: relative">
+  <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
+    Python
+  </div>
+  <div style="height: 40px; width: 25%; background-color:#48a0a5;"></div>
+</div>
+
+<div style="height: 20px"></div>
+
+<div style="display: flex; background-color:#eeeeed; width: 90%; position: relative">
+  <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
+    Java
+  </div>
+  <div style="height: 40px; width: 40%; background-color:#48a0a5;"></div>
+</div>
+
+<div style="height: 20px"></div>
+
+<div style="display: flex; background-color:#eeeeed; width: 90%; position: relative">
+  <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
+    Flutter
+  </div>
+  <div style="height: 40px; width: 37%; background-color:#48a0a5;"></div>
+</div>
+
+<div style="height: 20px"></div>
+
+<div style="display: flex; background-color:#eeeeed; width: 90%; position: relative">
+  <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
+    Android
+  </div>
+  <div style="height: 40px; width: 30%; background-color:#48a0a5;"></div>
+</div>
+
+<div style="height: 20px"></div>
+
+<div style="display: flex; background-color:#eeeeed; width: 90%; position: relative">
+  <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
+    Node.js
+  </div>
+  <div style="height: 40px; width: 8%; background-color:#48a0a5;"></div>
+</div>
 
