@@ -10,18 +10,10 @@ title: About me
 
 ## Skills
 
-<div class = "box">
-  <div class = "title">
+<div style="display: flex;">
+  <div style="height: 200px; width: 20px, color: red">
   </div>
-  <div class = "perc">
+  <div style="height: 200px; width: 20px, color: green">
   </div>
 </div>  
-
-<style type='text/css'>
-  [class*="box"] { display: flex;}
-  [class*="title"] { width: 100, height: 20, color: red}
-  [class*="perc"] { width: 100, height: 20, color: green}
-  
-</style>
-
 
