@@ -11,9 +11,9 @@ title: About me
 ## Skills
 
 <div style="display: flex;">
-  <div style="height: 200px; width: 20px, color: red">
+  <div style="height: 20px; width: 200px, background-color:red">
   </div>
-  <div style="height: 200px; width: 20px, color: green">
+  <div style="height: 20px; width: 200px, background-color:green">
   </div>
 </div>  
 
