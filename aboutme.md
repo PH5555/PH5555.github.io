@@ -34,7 +34,7 @@ title: About me
   <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
     Java
   </div>
-  <div style="height: 40px; width: 40%; background-color:#48a0a5;"></div>
+  <div style="height: 40px; width: 52%; background-color:#48a0a5;"></div>
 </div>
 
 <div style="height: 20px"></div>
