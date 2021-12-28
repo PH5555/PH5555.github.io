@@ -1,16 +1,9 @@
 ---
 layout: page
 title: About me
-subtitle: Why you'd want to go on a date with me
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+## 매일매일 열 걸음 성장하는 개발자 김동현입니다.
 
-- I rock a great mustache
-- I'm extremely loyal to my family
-
-What else do you need?
-
-### My story
-
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+한양대학교 정보시스템학과에 재학중인 프론트엔드 개발자 김동현입니다!
+안드로이드 앱 개발 및 임베디드 시스템에 관심이 있습니다.
