@@ -15,10 +15,10 @@ title: About me
 </div>
 
 <div style="display: flex;">
-  <div style="height: 20px; width: 200px, background-color:red">
+  <div style="height: 20px; width: 200px; background-color:red;">
     flutter
   </div>
-  <div style="height: 20px; width: 200px, background-color:green">
+  <div style="height: 20px; width: 200px; background-color:green;">
     30%
   </div>
 </div>  
