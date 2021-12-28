@@ -17,4 +17,11 @@ title: About me
   </div>
 </div>  
 
+<style type='text/css'>
+  [class*="box"] { display: flex;}
+  [class*="title"] { width: 100, height: 20, color: red}
+  [class*="perc"] { width: 100, height: 20, color: green}
+  
+</style>
+
 
