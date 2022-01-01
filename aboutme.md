@@ -23,7 +23,7 @@ title: About me
   <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
     C/C++
   </div>
-  <div style="height: 40px; width: 30%; background-color:#48a0a5;"></div>
+  <div style="height: 40px; width: 24%; background-color:#48a0a5;"></div>
 </div>
 
 <div style="height: 20px"></div>
@@ -32,7 +32,7 @@ title: About me
   <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
     Java
   </div>
-  <div style="height: 40px; width: 40%; background-color:#48a0a5;"></div>
+  <div style="height: 40px; width: 30%; background-color:#48a0a5;"></div>
 </div>
 
 <div style="height: 20px"></div>
@@ -41,7 +41,7 @@ title: About me
   <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
     Flutter
   </div>
-  <div style="height: 40px; width: 35%; background-color:#48a0a5;"></div>
+  <div style="height: 40px; width: 21%; background-color:#48a0a5;"></div>
 </div>
 
 <div style="height: 20px"></div>
@@ -50,6 +50,6 @@ title: About me
   <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
     Android
   </div>
-  <div style="height: 40px; width: 26%; background-color:#48a0a5;"></div>
+  <div style="height: 40px; width: 16%; background-color:#48a0a5;"></div>
 </div>
 
