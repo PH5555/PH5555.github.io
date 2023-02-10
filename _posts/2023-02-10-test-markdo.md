@@ -1,14 +1,13 @@
 ---
 layout: post
-title: JS - 반복문 성능 차이에 대하여
-subtitle: 반복문 성능 비교
+title: JS - 배열의 비동기 처리
 tags: [JS]
 comments: true
 ---
 
-## for?? forEach??
+## forEach는 비동기함수를 기다리지 않는다
 
-NestJs로 설문 가져오기 API를 만들면서, for문을 무자비하게 썼었다.
+아래 코드는 각 설문 문항에 맞는 답변을 가져오는 코드다.
 
 ```javascript
 for (const question of survey["surveyQuestions"]) {
@@ -25,78 +24,55 @@ for (const question of survey["surveyQuestions"]) {
 }
 ```
 
-위 코드가 처음 썼던 코든데, 이상하게도 너무 느렸다. (거의 3~5초 정도 걸렸다는...) 그냥 sql의 문제인가? 라고만 생각하고 넘어갔다.
-
-근데 코드리뷰 진행중 `for` 대신 `forEach`를 쓰라는 리뷰를 받았다. `forEach`를 알긴해도 `for`이 더 편해서(모든 언어에 존재하니까!) 그것만 썼었는데, 생각해보니까 정확한 메커니즘 차이도 모르고 있었다. 이에 반복문의 메커니즘과 성능을 비교해보고자 한다.
-
-##
-
-<!--
-This is a demo post to show you how to write blog posts with markdown. I strongly encourage you to [take 5 minutes to learn how to write in markdown](https://markdowntutorial.com/) - it'll teach you how to transform regular text into bold/italics/headings/tables/etc.
-
-**Here is some bold text**
-
-## Here is a secondary heading
-
-Here's a useless table:
-
-| Number | Next number | Previous number |
-| :----- | :---------- | :-------------- |
-| Five   | Six         | Four            |
-| Ten    | Eleven      | Nine            |
-| Seven  | Eight       | Six             |
-| Two    | Three       | One             |
-
-How about a yummy crepe?
-
-![Crepe](https://s3-media3.fl.yelpcdn.com/bphoto/cQ1Yoa75m2yUFFbY2xwuqw/348s.jpg)
-
-It can also be centered!
-
-![Crepe](https://s3-media3.fl.yelpcdn.com/bphoto/cQ1Yoa75m2yUFFbY2xwuqw/348s.jpg){: .mx-auto.d-block :}
-
-Here's a code chunk:
-
-```
-var foo = function(x) {
-  return(x + 5);
-}
-foo(3)
-```
-
-And here is the same code with syntax highlighting:
+문항 배열을 for로 순환하며 답변을 가져오는 형태이다. 하지만 이상하게도 너무너무너무 느렸다... 그리고, 코드리뷰 진행중 `for` 대신 `forEach`를 쓰라는 리뷰를 받았는데
 
 ```javascript
-var foo = function (x) {
-  return x + 5;
-};
-foo(3);
+survey["surveyQuestions"].forEach(async (question) => {
+  const { questionId } = question;
+  const questionRelation = ["question", "answerType", "singleChoiceAnswers"];
+  const questionQuery = {
+    question: { questionId },
+  };
+  const answer = await this.findOne({
+    relations: questionRelation,
+    where: questionQuery,
+  });
+  answers.push(answer);
+});
 ```
 
-And here is the same code yet again but with line numbers:
+로직을 수정해보니까 for로 했을때와 달리 값이 정상적으로 실행되지 않았다. 찾아보니 for과 달리 forEach는 비동기 함수를 기다려주지 않는다고 한다. 즉, 내부 코드에 await가 있던 없던 신경 안쓰고 넘어가 버린다.
 
-{% highlight javascript linenos %}
-var foo = function(x) {
-return(x + 5);
-}
-foo(3)
-{% endhighlight %}
+## Promise.all 을 이용한 병렬 처리
 
-## Boxes
+forEach가 비동기 함수를 기다려주지 않는 문제는 처음 코드와 같이 for 문으로 해결할 수 있다. 하지만 너무너무너무 느리다...! 그래서 map과 Promise.all을 이용해 병렬처리를 한다.
 
-You can add notification, warning and error boxes like this:
+```javascript
+const answers = [];
 
-### Notification
+const promises = survey["surveyQuestions"].map(async (question) => {
+  const { questionId } = question;
+  const questionRelation = ["question", "answerType", "singleChoiceAnswers"];
+  const questionQuery = {
+    question: { questionId },
+  };
+  const answer = await this.findOne({
+    relations: questionRelation,
+    where: questionQuery,
+  });
 
-{: .box-note}
-**Note:** This is a notification box.
+  answers.push(answer);
+});
 
-### Warning
+await Promise.all(promises);
+```
 
-{: .box-warning}
-**Warning:** This is a warning box.
+Promise.all은 비동기 함수들을 순차적으로 처리하지 않고, 한번에 병렬처리하기 때문에 for 보다 속도가 월등히 빨라진다.
 
-### Error
+## 그렇다면 ForEach도 병렬처리인가?
 
-{: .box-error}
-**Error:** This is an error box. -->
+forEach를 썼을 때 비동기함수가 한번에 처리되니까 병렬처리일까? 라는 생각을 했지만 공식 문서를 찾아보니 `순차적`으로 처리한다고 나와있었다.
+
+> forEach()는 주어진 callback을 배열에 있는 각 요소에 대해 오름차순으로 한 번씩 실행합니다. 삭제했거나 초기화하지 않은 인덱스 속성에 대해서는 실행하지 않습니다. (예: 희소 배열)
+
+이 글을 쓰다보니 병렬처리에 대한것이 너무 헷갈린다... 다음 포스팅에서 자세히 알아보도록 하자
