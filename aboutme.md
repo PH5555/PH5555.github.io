@@ -6,7 +6,7 @@ title: About me
 ## 매일매일 열 걸음 성장하는 개발자 김동현입니다.
 
 저는 현재 한양대학교 정보시스템학과에 재학중입니다. <br>
-앱 및 게임 개발, 임베디드 시스템, 메타버스에 관심 있습니다! (관심있는게 너무 많죠...😅) <br>
+웹앱 및 게임 개발, 메타버스에 관심 있습니다! <br>
 
 <div style="height: 14px"></div>
 
@@ -53,5 +53,19 @@ title: About me
     Android
   </div>
   <div style="height: 40px; width: 16%; background-color:#48a0a5;"></div>
+</div>
+
+<div style="display: flex; background-color:#eeeeed; width: 90%; position: relative">
+  <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
+    JS
+  </div>
+  <div style="height: 40px; width: 28%; background-color:#48a0a5;"></div>
+</div>
+
+<div style="display: flex; background-color:#eeeeed; width: 90%; position: relative">
+  <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
+    React
+  </div>
+  <div style="height: 40px; width: 35%; background-color:#48a0a5;"></div>
 </div>
 
