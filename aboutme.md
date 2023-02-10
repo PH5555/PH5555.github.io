@@ -55,12 +55,16 @@ title: About me
   <div style="height: 40px; width: 16%; background-color:#48a0a5;"></div>
 </div>
 
+<div style="height: 20px"></div>
+
 <div style="display: flex; background-color:#eeeeed; width: 90%; position: relative">
   <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
     JS
   </div>
   <div style="height: 40px; width: 28%; background-color:#48a0a5;"></div>
 </div>
+
+<div style="height: 20px"></div>
 
 <div style="display: flex; background-color:#eeeeed; width: 90%; position: relative">
   <div style="height: 40px; width: 20%; background-color:#58bec6; color: white; text-align: center; line-height: 40px;">
