@@ -6,6 +6,32 @@ tags: [JS]
 comments: true
 ---
 
+## for?? forEach??
+
+NestJs로 설문 가져오기 API를 만들면서, for문을 무자비하게 썼었다.
+
+```javascript
+for (const question of survey["surveyQuestions"]) {
+  answers.push(
+    await this.findOne({
+      relations: ["question", "answerType", "singleChoiceAnswers"],
+      where: {
+        question: {
+          questionId: question.questionId,
+        },
+      },
+    })
+  );
+}
+```
+
+위 코드가 처음 썼던 코든데, 이상하게도 너무 느렸다. (거의 3~5초 정도 걸렸다는...) 그냥 sql의 문제인가? 라고만 생각하고 넘어갔다.
+
+근데 코드리뷰 진행중 `for` 대신 `forEach`를 쓰라는 리뷰를 받았다. `forEach`를 알긴해도 `for`이 더 편해서(모든 언어에 존재하니까!) 그것만 썼었는데, 생각해보니까 정확한 메커니즘 차이도 모르고 있었다. 이에 반복문의 메커니즘과 성능을 비교해보고자 한다.
+
+##
+
+<!--
 This is a demo post to show you how to write blog posts with markdown. I strongly encourage you to [take 5 minutes to learn how to write in markdown](https://markdowntutorial.com/) - it'll teach you how to transform regular text into bold/italics/headings/tables/etc.
 
 **Here is some bold text**
@@ -73,4 +99,4 @@ You can add notification, warning and error boxes like this:
 ### Error
 
 {: .box-error}
-**Error:** This is an error box.
+**Error:** This is an error box. -->
