@@ -86,3 +86,37 @@ public class OrderServiceImpl implements OrderService{
 > 개방-폐쇄 원칙은 '소프트웨어 개체는 확장에 대해 열려 있어야 하고, 수정에 대해서는 닫혀 있어야 한다'는 프로그래밍 원칙이다.
 
 먼저 DIP(의존관계 역전 원칙)을 보겠다. 
+
+![a](https://github.com/CookieDOG/cookie-dog-mobile/assets/47862506/e46d303a-d240-4029-92f5-0b9f6115533b)
+
+의존관계 역전 원칙에 의하면 상위 계층이 하위 계층에 의존해야한다. 우리가 원하던 설계는 위의 그림과 같이 사용자가 인터페이스에만 의존하는 설계이다.
+
+![b](https://github.com/CookieDOG/cookie-dog-mobile/assets/47862506/41cc3c7a-d87b-40b9-84ef-7b9f05ff3965)
+
+하지만 실제로 까보면 사용자는 인터페이스만 의존할뿐만 아니라 구현자체에도 의존하고 있다. `private DiscountPolicy discountPolicy = new DiscountPolicy();` 이 구문에서 알 수 있다.
+
+그래서 우리는 애플리케이션의 전체 동작 방식을 구성하기위해서 구현객체를 생성하고 연결하는 책임을 가지는 별도의 설정 클래스를 만들어야한다.
+
+```java
+public class AppConfig {
+    public MemberService memberService() {
+        return new MemberServiceImpl(new MemoryMemberRepository());
+    }
+    
+    public OrderService orderService() {
+        return new OrderServiceImpl(new MemoryMemberRepository(), new RateDiscountPolicy());
+    }
+}
+```
+
+```java
+private MemberRepository memberRepository;
+private DiscountPolicy discountPolicy;
+
+public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    this.memberRepository = memberRepository;
+    this.discountPolicy = discountPolicy;
+}
+```
+
+이렇게 되면 의존관계에 대한 고미은 외부에 맡기고 실행에만 집중하면 된다. 이를 의존관계주입 `DI`라고 한다.
