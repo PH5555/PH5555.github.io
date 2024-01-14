@@ -73,7 +73,7 @@ String[] beanNames = app.getBeanDefinitionNames();
   
   스프링에서 내부에서 사용하는 빈
 
-<div style="height: 28px"></div>
+<div style="height: 20px"></div>
 
 스프링 빈의 정보를 보는 방법에도 여러가지가 있다.
 
@@ -87,4 +87,16 @@ String[] beanNames = app.getBeanDefinitionNames();
 
 ## BeanDefinition
 
+우리는 지금까지 `AnnotationConfigApplicationContext` 라는 클래스를 써서 스프링 컨테이너로 만들었다. 이 방법 외에도 스프링 컨테이너를 만드는 다른 방법이 존재한다.
 
+- AnnotationConfigApplicationContext
+  
+  AppConfig.class 로 설정
+  
+- GenericXmlApplicationContext
+  
+  AppConfig.xml 로 설정
+
+스프링은 어떻게 다양한 스프링 컨테이너 설정방법을 제공하는 걸까?
+
+그 중심에는 `BeanDefinition`이 있다. AnnotationConfigApplicationContext은 java 클래스를 읽어서 BeanDefinition으로 만들고 GenericXmlApplicationContext은 xml을 읽어서 BeanDefinition으로 만든다. 그러면 스프링은 ApplicationContext의 구현이 무엇으로 되어있는지 알 필요없이 BeanDefinition만 보고 스프링 컨테이너를 생성하면 된다. 
