@@ -51,5 +51,50 @@ public class Singleton {
 
 `스프링 컨테이너`는 이런 단점을 다 보완하면서 싱글톤 패턴의 장점만을 살려 `싱글톤 컨테이너를 생성한다.`
 
+## 싱글톤 컨테이너의 문제점
 
+싱글톤 패턴은 객체를 공유하기 때문에 상태를 유지하면 안된다. 
+
+- 클라이언트에 의해 값이 변경되면 안됨
+- 특정 클라이언트에 의존적인 필드가 있으면 안됨
+- 가급적이면 읽기만 가능하도록
+
+```java
+public class StatefulService {
+    private int price; //상태를 유지하는 필드
+    public void order(String name, int price) {
+        System.out.println("name = " + name + " price = " + price);
+        this.price = price; //여기가 문제!
+    }
+    public int getPrice() {
+        return price;
+    }
+}
+```
+```java
+@Test
+void statefulServiceSingleton() {
+    ApplicationContext ac = new
+    AnnotationConfigApplicationContext(TestConfig.class);
+    StatefulService statefulService1 = ac.getBean("statefulService", StatefulService.class);
+    StatefulService statefulService2 = ac.getBean("statefulService", StatefulService.class);
+    //ThreadA: A사용자 10000원 주문
+    statefulService1.order("userA", 10000);
+    //ThreadB: B사용자 20000원 주문
+    statefulService2.order("userB", 20000);
+    //ThreadA: 사용자A 주문 금액 조회
+    int price = statefulService1.getPrice();
+    //ThreadA: 사용자A는 10000원을 기대했지만, 기대와 다르게 20000원 출력
+    System.out.println("price = " + price);
+    Assertions.assertThat(statefulService1.getPrice()).isEqualTo(20000);
+}
+static class TestConfig {
+    @Bean
+    public StatefulService statefulService() {
+        return new StatefulService();
+    }
+}
+```
+
+여러 사용자가 같은 객체를 사용한다 해보자 order 메서드는 price라는 값을 변경시킨다. 만약에 사용자A가 order를 실행시키는 도중에 사용자B가 order를 실행시켰다면 사용자A는 예상과는 다른 결과를 얻게 된다. 그렇기 때문에 공유필드는 항상 조심해서 사용해야 한다.
   
