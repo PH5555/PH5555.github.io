@@ -97,4 +97,37 @@ static class TestConfig {
 ```
 
 여러 사용자가 같은 객체를 사용한다 해보자 order 메서드는 price라는 값을 변경시킨다. 만약에 사용자A가 order를 실행시키는 도중에 사용자B가 order를 실행시켰다면 사용자A는 예상과는 다른 결과를 얻게 된다. 그렇기 때문에 공유필드는 항상 조심해서 사용해야 한다.
-  
+
+## 스프링에서 싱글톤을 어떻게 유지할까
+
+우리가 옛날에 작성했던 AppConfig를 다시보자
+
+```java
+@Configuration
+public class AppConfig {
+    
+    @Bean
+    public MemberService memberService() {
+        return new MemberServiceImpl(memberRepository());
+    }
+    
+    @Bean
+    public MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
+    
+    @Bean
+    public OrderService orderService() {
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    }
+    
+    @Bean
+    public DiscountPolicy discountPolicy() {
+        return new RateDiscountPolicy();
+    }
+}
+```
+
+스프링 컨테이너에 해당 AppConfig 를 넘겨주면 Bean어노테이션이 붙어있는 모든 메서드를 호출해서 해당 객체를 빈으로 등록한다고 했다. 그러면 처음에 memberService를 호출하고 memberRepository, orderService, discountPolicy를 호출하여 총 3개의 MemoryMemberRepository객체가 만들어지는 것처럼 보인다. 하지만 싱글톤은 하나의 객체를 공유해야한다. 그렇다면 스프링은 어떻게 싱글톤을 유지할까?
+
+그 핵심원리는 `Configuration`어노테이션이 있다. Configuration어노테이션이 붙은 클래스는 이미 컨테이너에 존재하는 객체면 새로 생성하지 않고 그냥 원래있던 객체를 사용하는 방법으로 싱글톤을 유지한다.
