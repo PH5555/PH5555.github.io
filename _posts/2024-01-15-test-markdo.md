@@ -38,7 +38,7 @@ public class Singleton {
   
 - 생성자를 private로 해서 개발자가 실수로 새로운 인스턴스를 만들수 없게 한다.
 
-![singleton2](/assets/img/singleton2.png)
+![singleton2](/assets/img/singleton2.PNG)
 
 이런식으로 싱글톤 패턴을 적용하면 위의 그림과 같이 하나의 인스턴스를 공유하게 되어서 고객의 요청이 올때마다 인스터스를 생성하지 않게 된다.
 
