@@ -52,4 +52,30 @@ public class MemberServiceImpl implements MemberService{
 
 ## 컴포넌트 스캔 범위
 
+우리가 컴포넌트 스캔을 할 때 모든 자바 파일을 스캔하면 속도가 굉장히 느려질 것이다. 그러므로 한정된 파일만을 스캔하는것이 중요하다.
+
+```java
+@ComponentScan(
+ basePackages = "hello.core",
+}
+```
+
+ComponentScan의 옵션으로 basePackages을 지정하면 지정한 패키지를 포함한 하위 패키지를 스캔한다. 
+
+> ComponentScan의 basePackages를 지정하지 않으면 ComponentScan이 적용된 파일의 패키지부터 스캔을 시작한다. 해당 예시에서는 AppConfig 파일이 최상단에 있으므로 모든 파일을 스캔한다. 이렇게 따로 스캔정보를 입력하지 않고 설정정보를 최상단에 놓는 방법이 권장된다.
+
+> 스프링 부트의 시작 정보인 `@SpringBootApplication`안에는 `@ComponentScan`이 포함되어있다. 즉 ComponentScan을 따로 지정하지 않아도 실행된다. AnnotationConfigApplicationContext app = new AnnotationConfigApplicationContext(Application.class); 해당 코드를 작성하면 된다. (ComponentScan은 기본적으로 @Configuration 클래스를 모두 스캔하기 때문에 Config 파일 전부 삭제해야됨)
+
+## 컴포넌트 스캔 대상
+
+`@ComponentScan`은 Component만 스캔하는 것이 아니다.
+
+스캔 대상
+
+- Component
+- Repository
+- Controller
+- Service
+- Configuration     
+
 
