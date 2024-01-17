@@ -49,3 +49,7 @@ public class MemberServiceImpl implements MemberService{
 > 이 때 `Autowired`를 붙인 이유는 의존관계를 설정하기 위해서다. 기존 설정 파일에서는 해당 생성자를 실행해서 의존관계를 직접 해주지만 컴포넌트 스캔으로 할 경우에는 코드를 직접 실행하지 않기 때문에 의존관계를 설정할 수 없다. 따라서 Autowired어노테이션을 붙여 의존관계를 설정해준다.
 
 그리고 `AnnotationConfigApplicationContext`의 인자로 AutoAppConfig를 넘겨주면 앱이 정상적으로 실행된다. 
+
+## 컴포넌트 스캔 범위
+
+
