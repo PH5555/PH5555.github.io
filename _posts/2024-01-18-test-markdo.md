@@ -10,6 +10,7 @@ comments: true
 지금까지 의존관계 주입을 수동과 자동으로 해봤다. 자동 의존관계 주입의 방법에는 총 4가지가 있다.
 
 1. 생성자 의존관계 주입
+   
 ```java
 @Autowired
 public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
