@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring - 스프링의 핵심 원리 이해
-tags: [Spring]
+tags: [Spring, 스프링 기본 핵심 원리]
 comments: true
 ---
 
