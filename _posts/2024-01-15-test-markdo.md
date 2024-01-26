@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring - 싱글톤 컨테이너
-tags: [Spring]
+tags: [Spring, 스프링 기본 핵심 원리]
 comments: true
 ---
 
