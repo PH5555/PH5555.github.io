@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring - 의존관계 주입의 선택
-tags: [Spring]
+tags: [Spring, 스프링 기본 핵심 원리]
 comments: true
 ---
 
