@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring - 조희 빈이 2개 이상일 때 해결
-tags: [Spring]
+tags: [Spring, 스프링 기본 핵심 원리]
 comments: true
 ---
 
