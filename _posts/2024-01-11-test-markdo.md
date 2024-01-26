@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring - 객체 지향 원리 적용
-tags: [Spring]
+tags: [Spring, 스프링 기본 핵심 원리]
 comments: true
 ---
 
