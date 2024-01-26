@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring - 프로토타입 스코프
-tags: [Spring]
+tags: [Spring, 스프링 기본 핵심 원리]
 comments: true
 ---
 
