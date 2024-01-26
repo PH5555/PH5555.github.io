@@ -15,7 +15,7 @@ comments: true
 
 스코프는 `@Scope()`로 지정할 수 있다.
 
-```
+```java
 public void prototypeBeanFind() {
   AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(PrototypeBean.class);
   System.out.println("find prototypeBean1");
