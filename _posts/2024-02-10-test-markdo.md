@@ -239,3 +239,4 @@ public interface HttpMessageConverter<T> {
 
 ![st](/assets/img/converter_stru.PNG)
 
+요청을 하게 되면 우선 해당 핸들러에 맞는 RequestMapping 핸들러 어댑터가 실행된다. 그리고 핸들러를 실행하기 위한 인자들이 들어오는데 이 인자들은 엄청나게 다양하다. 그래서 
