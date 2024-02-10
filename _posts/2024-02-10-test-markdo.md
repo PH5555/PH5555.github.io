@@ -239,4 +239,4 @@ public interface HttpMessageConverter<T> {
 
 ![st](/assets/img/converter_stru.PNG)
 
-요청을 하게 되면 우선 해당 핸들러에 맞는 RequestMapping 핸들러 어댑터가 실행된다. 그리고 핸들러를 실행하기 위한 인자들이 들어오는데 이 인자들은 엄청나게 다양하다. 그래서 
+요청을 하게 되면 우선 해당 핸들러에 맞는 RequestMapping 핸들러 어댑터가 실행된다. 그리고 핸들러를 실행하기 위한 인자들이 들어오는데 이 인자들은 엄청나게 다양하다. 그래서 ArgumentResolver를 통해 이 인자들을 유연하게 처리해줄 수 있게 해준다. 이 때 메시지 컨버터는 ArgumentResolver 다음에 실행되어 Json및 String으로 변환을 해준다. 
