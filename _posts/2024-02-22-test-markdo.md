@@ -192,3 +192,25 @@ public String addItem(@Validated @ModelAttribute("item") ItemSaveForm form, Bind
 ```
 
 @ModelAttribute의 클래스 타입을 위에서 정의한 클래스 타입으로 바꿔준다. 로직에 맞게 코드를 수정해주면 된다.
+
+## Http 메시지 컨버터
+
+`@Valid`는 메시지 컨버터(RequestBody)에도 적용할 수 있다. 
+
+```java
+@RestController 
+@RequestMapping("/validation/api/items")
+public class ValidationItemApiController{
+    @PostMapping("/add")
+    public Object addItem(@RequestBody @Validated ItemSaveForm form, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return bindingResult.getAllErrors();
+        }
+        return form;
+    }
+}
+```
+
+똑같은 데이터를 Json으로 받기 때문에 `@RequestBody`를 써주고 RestController를 넣어준다. 그리고 에러가 있으면 에러를 출력해주고 에러가 없다면 요청사항을 그대로 출력해준다.
+
+`@ModelAttribute`와 다른점은 데이터 바인딩 에러가 발생하면 컨트롤러 자체가 실행되지 않는다는 것이다. ModelAttribute는 필드 하나하나 검사를 하는 반면 Json은 객체 단위로 Validated가 적용되기 때문에 바인딩이 실패하면 다른 필드도 실행되지 않아 컨트롤러로 넘어가지 않는다.
