@@ -293,13 +293,13 @@ public String edit(@PathVariable Long itemId, @ModelAttribute Item item){
 
 정답은 `redirect`를 통해 뷰를 렌더링하는것이다. 기존의 상품 등록 페이지에서 새로고침을 계속해보면 무한으로 상품이 등록되는걸 볼 수 있다.
 
-![prg_pre]("/assets/img/prg_pre.PNG")
+![prg_pre](/assets/img/prg_pre.PNG)
 
 우리가 상품 등록 페이지를 처음 들어올 때 Get요청을 통해 화면을 불러온다. 그리고 상품을 등록하기 위해 버튼을 클릭하면 Post 요청을 하게 되고, 새로운 페이지를 보여주게 된다.
 웹 브라우저의 새로 고침은 마지막에 서버에 전송한 데이터를 다시 전송한다. 따라서 우리가 마지막에 Post요청을 통해서 상품등록을 했기 때문에
 새로고침을 하면 상품등록이 계속 되는것이다.
 
-![prg]("/assets/img/prg.PNG")
+![prg](/assets/img/prg.PNG)
 
 이것을 PRG패턴을 통해서 해결할 수 있다. 상품을 등록하고 뷰 템플릿으로 이동하는 것이 아니라 `redirect`를 통해서 새로운 화면을 요청해주면된다.
 redirect를 하면 새로운 화면을 Get으로 요청하기 때문에 새로고침을해도 문제가 없다. 
