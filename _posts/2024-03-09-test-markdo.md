@@ -177,5 +177,87 @@ public String hello(@RequestParam IpPort ipPort){
 
 ## 포메터
 
-화면에 숫자를 출력할 때 1000을 1,000이런식으로 포멧을 하여 출력할 때가 많다. 이런과정을 편리하게 처리해줄 수 있는 컨버터라는 기능이 있다.
+화면에 숫자를 출력할 때 1000을 1,000이런식으로 포멧을 하여 출력할 때가 많다. 이런과정을 편리하게 처리해줄 수 있는 포메터라는 기능이 있다.
 
+> 포메터는 문자에 특화되어있다. 문자 -> 객체, 객체 -> 문자
+
+```java
+public class MyNumberFormatter implements Formatter<Number>{
+    @Override 
+    public Number parse(String text, Locale locale) throws ParseException {
+        NumberFormat format = NumberFormat.getInstance(locale);
+        Number parse = format.parse(text);
+        return parse;
+    }
+    
+    @Override
+    public String print(Number object, Locale locale){
+        NumberFormat instance = NumberFormat.getInstance(locale);
+        String format = instance.format(object);
+        return format;
+    }
+}
+```
+
+- `Formatter`인터페이스를 구현하면 된다.
+- parse는 문자를 객체로 만들어주는것이고, print는 객체를 문자로 반환해준다.
+- NumberFormat은 나라마다 다른 숫자 표기방식을 적용해서 , 를 찍어준다.
+
+## 포메터 적용하기
+
+포메터는 생각해보면 문자에 특화되어있는 컨버터일 뿐이다. 따라서 컨버젼 서비스에 포메터를 적용할 수 있는 기능이 있다.
+
+```java
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    @Override 
+    public void addFormatters(FormatterRegistry registry){
+        registry.addConverter(new IpPortToStringConverter());
+        registry.addConverter(new StringToIpPortConverter());
+        registry.addFormatter(new MyNumberFormatter());
+    }
+    
+}
+```
+
+- addFormatter 메서드로 포메터를 추가한다.
+
+> 컨버터와 포메터중에 컨버터가 우선순위가 더 높으므로 겹치는게 있으면 삭제한다.
+
+## 스프링 기본 포메터
+
+스프링에서는 자주 쓰이는 포메터를 기본으로 제공한다.
+
+- @NumberFormat : 숫자 관련 형식
+- @DateTimeFormat : 날짜 관련 형식
+
+```java
+public class FormatterController {
+    @GetMapping("formatter/edit")
+    public String formatter(Model model){
+        Form form = new Form();
+        
+        form.setNumber(500000);
+        form.setLocalDateTime(LocalDateTime.now());
+        
+        model.addAttribute("form", form);
+        return "formatter-form";
+    }
+    
+    @PostMapping("formatter/edit")
+    public String edit(@ModelAttribute Form form){
+        return "formatter-edit";
+    }
+    
+    @Data 
+    static class Form {
+        @NumberFormat(pattern = "###,###")
+        private Integer number;
+        
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        private LocalDateTime localDateTime;
+    }
+}
+```
+
+포메터 안에 패턴에 따라 포멧이 결정된다. 
