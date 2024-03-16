@@ -1,4 +1,4 @@
----
+e---
 layout: post
 title: Spring - 커넥션 풀과 데이터소스
 tags: [Spring, 데이터 접근 핵심 원리]
@@ -26,7 +26,7 @@ comments: true
 1. 커넥션 요청이 들어오면 커넥션 풀에 들어있는 커넥션 중 하나를 반환한다.
 2. 커넥션을 모두 사용하면 커넥션을 종료하는 것이 아니라 다음에 다시 사용할 수 있도록 커넥션 풀에 커넥션이 살아있는 채로 반환한다.
 
-# 데이터소스
+## 데이터소스
 
 우리는 앞서서 데이터베이스를 연결할 때 DriverManager를 사용했다. 커넥션을 얻는 방법에는 여러가지가 있다. 이런 요구사항은 언제든 바뀔 수 있다. 만약 클라이언트와 DriverManger가 직접적인 의존관계를 가지고 있다면 Hikari로 바꾸려고 했을 때 
 모든 코드를 수정해야 할 것이다.
@@ -61,3 +61,68 @@ private static void print(Connection connection) {
 ```
 
 DriverManager는 요청을 할 때마다 파라미터를 넘겨줘야하는 반면 DataSource는 처음 한번만 넘겨주면 된다.
+
+## 커넥션 풀
+
+```java
+@Test
+void hikari() throws SQLException, InterruptedException {
+    HikariDataSource dataSource = new HikariDataSource();
+    dataSource.setJdbcUrl(URL);
+    dataSource.setUsername(USERNAME);
+    dataSource.setPassword(PASSWORD);
+    dataSource.setMaximumPoolSize(10);
+    dataSource.setPoolName("myPool");
+    Connection connection1 = dataSource.getConnection();
+    Connection connection2 = dataSource.getConnection();
+
+    print(connection1);
+    print(connection2);
+    Thread.sleep(1000);
+}
+```
+
+- 구현체를 `HikariDataSource`로 바꾸고, username, password, url을 설정한다.
+- poolName 하고 maximumpoolsize를 설정한다.
+- 커넥션을 생성하는 작업은 별도의 스레드에서 실행되기 때문에 커넥션 풀이 생성되는것을 보려면 `Thread.sleep`을 걸어주어야 한다.
+
+## 서버에 DataSource 적용
+
+```java
+private final DataSource dataSource;
+
+public MemberRepositoryV1(DataSource dataSource) {
+    this.dataSource = dataSource;
+}
+
+private Connection getConnection() throws SQLException {
+    Connection connection = dataSource.getConnection();
+    return connection;
+}
+```
+
+데이터소스를 외부에서 주입받아서 사용하고, 데이터소스를 이용해서 커넥션을 얻을 수 있다.
+
+```java
+private void close(Connection connection, PreparedStatement pstm, ResultSet resultSet) {
+    JdbcUtils.closeResultSet(resultSet);
+    JdbcUtils.closeStatement(pstm);
+    JdbcUtils.closeConnection(connection);
+}
+```
+
+원래 close하는 로직을 일일히 짰어야하는데 JdbcUtils 를 사용하면 그럴 필요가 없다. 또한 해당 메서드는 커넥션을 완전히 종료하는 것이 아니라 커넥션 풀에 반환해준다.
+
+```java
+@BeforeEach
+void before(){
+    HikariDataSource dataSource = new HikariDataSource();
+    dataSource.setJdbcUrl(URL);
+    dataSource.setUsername(USERNAME);
+    dataSource.setPassword(PASSWORD);
+    dataSource.setPoolName("mypool");
+    repository = new MemberRepositoryV1(dataSource);
+}
+```
+
+사용을 할 때에는 데이터소스를 만들어주고 레파지토리에 넘겨주면 된다.(데이터소스가 이곳에서 한번만 만들어진다.)
